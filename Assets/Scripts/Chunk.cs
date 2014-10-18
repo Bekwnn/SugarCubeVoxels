@@ -11,6 +11,8 @@ public class Chunk : MonoBehaviour {
 	public int chunkY;
 	public int chunkZ;
 
+	public float voxelScale;
+
 	public List<Vector3> newVertices = new List<Vector3>();
 	public List<int> newTriangles = new List<int>();
 	public List<Vector2> newUV = new List<Vector2>();
@@ -74,10 +76,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeTop(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x, y, z+1));
-		newVertices.Add( new Vector3(x+1, y, z+1));
-		newVertices.Add( new Vector3(x+1, y, z));
-		newVertices.Add( new Vector3(x, y, z));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -89,10 +91,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeBot(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x, y-1, z));
-		newVertices.Add( new Vector3(x+1, y-1, z));
-		newVertices.Add( new Vector3(x+1, y-1, z+1));
-		newVertices.Add( new Vector3(x, y-1, z+1));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z+1)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -104,10 +106,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeFront(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x, y, z));
-		newVertices.Add( new Vector3(x+1, y, z));
-		newVertices.Add( new Vector3(x+1, y-1, z));
-		newVertices.Add( new Vector3(x, y-1, z));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -119,10 +121,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeBack(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x+1, y-1, z+1));
-		newVertices.Add( new Vector3(x+1, y, z+1));
-		newVertices.Add( new Vector3(x, y, z+1));
-		newVertices.Add( new Vector3(x, y-1, z+1));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z+1)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -134,10 +136,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeRight(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x+1, y-1, z));
-		newVertices.Add( new Vector3(x+1, y, z));
-		newVertices.Add( new Vector3(x+1, y, z+1));
-		newVertices.Add( new Vector3(x+1, y-1, z+1));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x+1, y-1, z+1)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -149,10 +151,10 @@ public class Chunk : MonoBehaviour {
 	}
 
 	void CubeLeft(int x, int y, int z, byte block) {
-		newVertices.Add( new Vector3(x, y-1, z+1));
-		newVertices.Add( new Vector3(x, y, z+1));
-		newVertices.Add( new Vector3(x, y, z));
-		newVertices.Add( new Vector3(x, y-1, z));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z+1)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y, z)));
+		newVertices.Add( voxelToWorldCord(new Vector3(x, y-1, z)));
 
 		Vector2 texturePos;
 		if (block==1)
@@ -195,6 +197,10 @@ public class Chunk : MonoBehaviour {
 		newUV.Add(new Vector2(tUnit * texture.x, tUnit * texture.y));
 
 		faceCount++;
+	}
+
+	Vector3 voxelToWorldCord(Vector3 v) {
+		return new Vector3(v.x*voxelScale, v.y*voxelScale, v.z*voxelScale);
 	}
 
 	byte Block(int x, int y, int z) {

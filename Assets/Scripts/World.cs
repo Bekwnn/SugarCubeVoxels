@@ -8,6 +8,8 @@ public class World : MonoBehaviour {
 	public int worldY=16;
 	public int worldZ=16;
 
+	public float voxelScale=1;
+
 	public GameObject chunk;
 	public GameObject[,,] chunks;
 	public int chunkSize=16;
@@ -40,13 +42,14 @@ public class World : MonoBehaviour {
 				for (int z=0; z<chunks.GetLength(2); z++) {
 
 					chunks[x,y,z] = Instantiate(chunk,
-					                            new Vector3(x*chunkSize,y*chunkSize,z*chunkSize),
-					                            new Quaternion(0,0,0,0)) as GameObject;
+					                 new Vector3(x*chunkSize*voxelScale,y*chunkSize*voxelScale,z*chunkSize*voxelScale),
+					                 new Quaternion(0,0,0,0)) as GameObject;
 
 					Chunk newChunkScript = chunks[x,y,z].GetComponent<Chunk>();
 
 					newChunkScript.worldGO = gameObject;
 					newChunkScript.chunkSize = chunkSize;
+					newChunkScript.voxelScale = voxelScale;
 					newChunkScript.chunkX = x*chunkSize;
 					newChunkScript.chunkY = y*chunkSize;
 					newChunkScript.chunkZ = z*chunkSize;
