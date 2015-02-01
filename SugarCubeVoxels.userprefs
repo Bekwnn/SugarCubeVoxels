@@ -1,9 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\World.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TiledAtlas.shader">
     <Files>
-      <File FileName="Assets\Scripts\World.cs" Line="18" Column="43" />
-      <File FileName="Assets\Scripts\Chunk.cs" Line="35" Column="32" />
+      <File FileName="Assets\Scripts\TiledAtlas.shader" Line="23" Column="97" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
